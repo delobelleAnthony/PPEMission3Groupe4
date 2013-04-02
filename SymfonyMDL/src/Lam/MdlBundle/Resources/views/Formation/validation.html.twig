@@ -1,0 +1,10 @@
+{% extends 'LamMdlBundle::layout.html.twig' %}
+
+{% block body %}
+
+
+    Vous venez d'inscrire {{nb}} personnes à la formation : {{message}} <br />
+    Horaire : {{horaire}}<br />
+    Salle : {{salle}}<br /><br />
+    <a href="{{ path('LamMdlBundle_homepage') }}"> Retour </a>
+{% endblock %}

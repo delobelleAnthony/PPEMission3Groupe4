@@ -13,7 +13,6 @@ LamMdlBundle_datesstageinfo:
     pattern:  /datesstageinfo/{num}
     defaults: { _controller: LamMdlBundle:FormationInformatique:stage , num:1}
 
-
 LamMdlBundle_formationsport:
     pattern:  /fs
     defaults: { _controller: LamMdlBundle:FormationSport:liste }    
@@ -25,11 +24,11 @@ LamMdlBundle_contenuformationsport:
 LamMdlBundle_datesstagesport:
     pattern:  /datesstagesport/{num}
     defaults: { _controller: LamMdlBundle:FormationSport:stage , num:1}
-
-LamMdlBundle_test:
-    pattern:  /test
-    defaults: { _controller: LamMdlBundle:Default:test}
     
 LamMdlBundle_inscription:
-    pattern:  /inscription/{num}
-    defaults: { _controller: LamMdlBundle:FormationInformatique:add, num:1}
+    pattern:  /inscription/{idFormation}/{nbPlacesRestantes}
+    defaults: { _controller: LamMdlBundle:Default:add, idFormation:0, nbPlacesRestantes:0}
+    
+LamMdlBundle_validation:
+    pattern:  /validation
+    defaults: { _controller: LamMdlBundle:Default:validation}

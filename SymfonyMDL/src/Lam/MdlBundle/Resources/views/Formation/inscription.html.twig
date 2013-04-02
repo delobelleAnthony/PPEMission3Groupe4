@@ -1,0 +1,25 @@
+{% extends 'LamMdlBundle::layout.html.twig' %}
+
+{% block body %}
+<form action="{{path('LamMdlBundle_inscription') }}"  method='POST' {{form_enctype(form)}}>
+        
+        {{message}}
+        
+        <div>
+            {{form_label(form.idAssociation , 'Association : ')}}
+            {{form_errors(form.idAssociation)}}
+            {{form_widget(form.idAssociation)}}
+        </div>
+        
+        <div>
+            {{form_label(form.nbInscrit , 'Nombre de participants : ')}}
+            {{form_errors(form.nbInscrit)}}
+            {{form_widget(form.nbInscrit)}}
+        </div>
+        {{ form_errors(form) }}
+        {{ form_rest(form) }}
+    
+        
+        <p> <button type="submit">S'incrire</button></p>
+</form>
+{% endblock %}

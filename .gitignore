@@ -11,3 +11,7 @@ web/bundles/*
 # Configuration files
 app/config/parameters.ini
 app/config/parameters.yml
+/SymfonyMDL/nbproject/private/
+/nbproject/private/
+/SymfonyMDL/app/cache/
+/SymfonyMDL/app/logs/

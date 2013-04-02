@@ -6,16 +6,23 @@ namespace Lam\MdlBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
-use Lam\MdlBundle\Inscription;
+use Lam\MdlBundle\Entity\Inscription;
 
 
 class InscriptionType extends AbstractType{
+
+    private $tableauNbMax;
+    
+    public function __construct($nbInscrits) {
+        $this->tableauNbMax = $nbInscrits;
+    }
+
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
             ->add('idAssociation')
-            ->add('nbInscrit')
-            ->add('idStage', 'text', array(data));
+            ->add('nbInscrit', 'choice', array('choices'=>$this->tableauNbMax))            
+            ->add('idFormation', 'hidden');
             
     }
 

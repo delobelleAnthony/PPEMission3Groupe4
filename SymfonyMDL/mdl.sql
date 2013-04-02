@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 19 Mars 2013 à 12:29
+-- Généré le: Mar 02 Avril 2013 à 09:15
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.4.3
 
@@ -29,9 +29,6 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `association` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` longtext NOT NULL,
-  `nomResponsable` varchar(15) DEFAULT NULL,
-  `prenomResponsalbe` varchar(15) DEFAULT NULL,
-  `adresseMail` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
@@ -39,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `association` (
 -- Contenu de la table `association`
 --
 
-INSERT INTO `association` (`id`, `nom`, `nomResponsable`, `prenomResponsalbe`, `adresseMail`) VALUES
-(1, 'Football', NULL, NULL, NULL),
-(2, 'Badminton', NULL, NULL, NULL);
+INSERT INTO `association` (`id`, `nom`) VALUES
+(1, 'Football'),
+(2, 'Badminton');
 
 -- --------------------------------------------------------
 
@@ -465,15 +462,15 @@ CREATE TABLE IF NOT EXISTS `formation` (
 --
 
 INSERT INTO `formation` (`id`, `Date`, `Horaire`, `Salle`, `Adresse`, `Cout`, `Repas`, `DateLimite`, `laFormationSport_id`, `laFormationInformatique_id`, `nbInscrit`) VALUES
-(1, '2013-06-03', '19h00', 'Lorraine 1', '', '', '', '0000-00-00', 1, NULL, 0),
-(2, '2013-05-02', '19h00', 'Alsace 1', '', '', '', '0000-00-00', 2, NULL, 0),
-(3, '2013-05-12', '17h00', 'Lorraine 2', '', '', '', '0000-00-00', 3, NULL, 0),
-(4, '2013-05-30', '9h-12h et 13h30 - 17h', 'informatique mrsl', 'Maison Régionale  des Sports de Lorraine 13 Rue Jean Moulin 54 510 Tomblaine', '55 € support de cours inclus', 'A charge des participants', '2013-04-30', NULL, 1, 0),
-(5, '2013-06-03', '9h-12h et 13h30 - 17h', 'informatique', 'Maison Régionale  des Sports de Lorraine 13 Rue Jean Moulin 54 510 Tomblaine', '110 € support de cours inclus', 'A charge des participants', '2013-05-17', NULL, 2, 0),
-(6, '2013-05-19', '9h – 17h', 'Informatique', 'Maison Régionale  des Sports de Lorraine 13 Rue Jean Moulin 54 510 Tomblaine', '110 € support de cours inclus', 'A charge des participants', '2013-04-01', NULL, 3, 0),
-(7, '2013-05-28', '9h – 17h', 'Laboratoire', 'Lycée Carnot 160 rue du Jambon 54 510 Tomblaine', '110 € support de cours inclus', 'A charge des participants', '2013-05-01', NULL, 4, 0),
-(8, '2013-06-28', '9h-12h et 13h30 - 17h', 'Laboratoire', 'Lycée Carnot 160 rue du Jambon 54 510 Tomblaine', '55 € support de cours inclus', 'A charge des participants', '2013-06-01', NULL, 1, 0),
-(9, '2013-05-21', '9h-12h et 13h30 - 17h', 'Informatique mrsl', '', '55 € support de cours inclus', 'A charge des participants', '2013-05-02', NULL, 5, 0);
+(1, '2013-06-03', '19h00', 'Lorraine 1', '', '', '', '0000-00-00', 1, NULL, 123),
+(2, '2013-05-02', '19h00', 'Alsace 1', '', '', '', '0000-00-00', 2, NULL, 33),
+(3, '2013-05-12', '17h00', 'Lorraine 2', '', '', '', '0000-00-00', 3, NULL, 12),
+(4, '2013-05-30', '9h-12h et 13h30 - 17h', 'informatique mrsl', 'Maison Régionale  des Sports de Lorraine 13 Rue Jean Moulin 54 510 Tomblaine', '55 € support de cours inclus', 'A charge des participants', '2013-04-30', NULL, 1, 25),
+(5, '2013-06-03', '9h-12h et 13h30 - 17h', 'informatique', 'Maison Régionale  des Sports de Lorraine 13 Rue Jean Moulin 54 510 Tomblaine', '110 € support de cours inclus', 'A charge des participants', '2013-05-17', NULL, 2, 33),
+(6, '2013-05-19', '9h – 17h', 'Informatique', 'Maison Régionale  des Sports de Lorraine 13 Rue Jean Moulin 54 510 Tomblaine', '110 € support de cours inclus', 'A charge des participants', '2013-04-01', NULL, 3, 26),
+(7, '2013-05-28', '9h – 17h', 'Laboratoire', 'Lycée Carnot 160 rue du Jambon 54 510 Tomblaine', '110 € support de cours inclus', 'A charge des participants', '2013-05-01', NULL, 4, 1),
+(8, '2013-06-28', '9h-12h et 13h30 - 17h', 'Laboratoire', 'Lycée Carnot 160 rue du Jambon 54 510 Tomblaine', '55 € support de cours inclus', 'A charge des participants', '2013-06-01', NULL, 1, 25),
+(9, '2013-05-21', '9h-12h et 13h30 - 17h', 'Informatique mrsl', '', '55 € support de cours inclus', 'A charge des participants', '2013-05-02', NULL, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -565,21 +562,69 @@ INSERT INTO `formation_intervenant` (`formation_id`, `intervenant_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `inscription` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stage` int(11) DEFAULT NULL,
   `association` int(11) DEFAULT NULL,
   `nbInscrit` int(11) NOT NULL,
+  `idFormation` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `IDX_5E90F6D6C27C9369` (`stage`),
   KEY `IDX_5E90F6D6FD8521CC` (`association`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 --
 -- Contenu de la table `inscription`
 --
 
-INSERT INTO `inscription` (`id`, `stage`, `association`, `nbInscrit`) VALUES
-(1, NULL, 1, 123),
-(2, NULL, 1, 13);
+INSERT INTO `inscription` (`id`, `association`, `nbInscrit`, `idFormation`) VALUES
+(1, 1, 123, 1),
+(2, 1, 12, 4),
+(3, 1, 2, 5),
+(4, 1, 2, 5),
+(5, 1, 3, 5),
+(6, 1, 0, 5),
+(7, 1, 18, 2),
+(8, 1, 15, 2),
+(9, 1, 12, 4),
+(10, 1, 0, 4),
+(11, 1, 1, 4),
+(12, 1, 25, 8),
+(13, 1, 13, 5),
+(14, 1, 13, 5),
+(15, 1, 3, 3),
+(16, 1, 11, 6),
+(17, 1, 3, 6),
+(18, 1, 1, 7),
+(19, 1, 4, 3),
+(20, 1, 1, 9),
+(21, 1, 2, 6),
+(22, 1, 1, 6),
+(23, 1, 1, 6),
+(24, 1, 1, 6),
+(25, 1, 1, 6),
+(26, 1, 1, 6),
+(27, 1, 1, 6),
+(28, 1, 1, 6),
+(29, 1, 1, 6),
+(30, 1, 1, 6),
+(31, 1, 1, 6),
+(32, 1, 1, 3),
+(33, 1, 1, 9),
+(34, 1, 1, 9),
+(35, 1, 1, 3),
+(36, 1, 1, 3),
+(37, 1, 1, 3),
+(38, 1, 1, 3),
+(39, 1, 1, 9);
+
+--
+-- Déclencheurs `inscription`
+--
+DROP TRIGGER IF EXISTS `ajoutNombreInscrits`;
+DELIMITER //
+CREATE TRIGGER `ajoutNombreInscrits` BEFORE INSERT ON `inscription`
+ FOR EACH ROW UPDATE formation 
+set formation.nbInscrit = formation.nbInscrit + NEW.nbInscrit
+WHERE formation.id = New.idFormation
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -603,31 +648,6 @@ INSERT INTO `intervenant` (`id`, `Nom`, `Prenom`) VALUES
 (2, 'GOLADE', 'Larry'),
 (3, 'MANVUSSA', 'Gérard'),
 (4, 'ANSSIEU', 'Cécile');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `stage`
---
-
-CREATE TABLE IF NOT EXISTS `stage` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idFormation` int(11) NOT NULL,
-  `nbParticipantsMax` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
-
---
--- Contenu de la table `stage`
---
-
-INSERT INTO `stage` (`id`, `idFormation`, `nbParticipantsMax`) VALUES
-(1, 1, 25),
-(2, 1, 25),
-(3, 1, 25),
-(4, 1, 25),
-(5, 1, 25),
-(6, 1, 25);
 
 -- --------------------------------------------------------
 
@@ -719,7 +739,6 @@ ALTER TABLE `formation_intervenant`
 -- Contraintes pour la table `inscription`
 --
 ALTER TABLE `inscription`
-  ADD CONSTRAINT `FK_5E90F6D6C27C9369` FOREIGN KEY (`stage`) REFERENCES `stage` (`id`),
   ADD CONSTRAINT `FK_5E90F6D6FD8521CC` FOREIGN KEY (`association`) REFERENCES `association` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

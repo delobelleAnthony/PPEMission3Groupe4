@@ -22,11 +22,11 @@ class Inscription
     private $id;
 
     /**
-     * @var integer $idStage
-     * @ORM\ManyToOne(targetEntity="Stage", inversedBy="id")
-     * @ORM\JoinColumn(name="stage", referencedColumnName="id")
+     * @var integer $idFormation
+     * @ORM\Column(name="idFormation", type="integer")
+     *
      */
-    private $idStage;
+    private $idFormation;
 
     /**
      * @var integer $idAssociation
@@ -42,6 +42,7 @@ class Inscription
      */
     private $nbInscrit;
 
+    
 
     /**
      * Get id
@@ -111,5 +112,25 @@ class Inscription
     public function getNbInscrit()
     {
         return $this->nbInscrit;
+    }
+
+    /**
+     * Set idFormation
+     *
+     * @param integer $idFormation
+     */
+    public function setIdFormation($idFormation)
+    {
+        $this->idFormation = $idFormation;
+    }
+
+    /**
+     * Get idFormation
+     *
+     * @return integer 
+     */
+    public function getIdFormation()
+    {
+        return $this->idFormation;
     }
 }

@@ -8,11 +8,11 @@
 
 
 
-
+<a href="{{ path('LamMdlBundle_formationinformatique') }}"> Retour </a>
   {% for unS in lesStages %}
 
-<a href="{{ path('LamMdlBundle_formationinformatique') }}"> Retour </a>
 
+   
      <h2>Stage {{nb}}</h2>
       Date: {{ unS.Date|date('d-m-Y') }}</br>
              Horaire:  {{ unS.Horaire }}</br>       
@@ -34,6 +34,14 @@
         <h3>- {{ unI.Prenom }} {{ unI.Nom }}</h3>
       {% endfor %}
   {% set nb=nb+1 %}
+        
+        
+
+        {% if unS.nbInscrit<unS.laFormationInformatique.nbPlace %}
+        <li><a class='lien' href="{{ path('LamMdlBundle_inscription', {'idFormation':unS.id, 'nbPlacesRestantes':unS.laFormationInformatique.nbPlace-unS.nbInscrit} ) }}" >Inscription</a></li>
+        {% else %}
+        <p class="complet">Il n'y a plus de place pour ce stage.</p>
+        {% endif %}
   {% endfor %}
 
 

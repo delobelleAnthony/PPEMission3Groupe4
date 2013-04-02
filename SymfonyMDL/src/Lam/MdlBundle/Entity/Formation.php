@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Formation
 {
+    
+    
+    
     /**
      * @var integer $id
      *
@@ -92,6 +95,20 @@ private $lesIntervenants;
      * @ORM\JoinColumn(nullable=true)
      */
     private $laFormationInformatique;
+    
+    /**
+     *
+     * @var type 
+     * 
+     * @ORM\OneToMany(targetEntity="Inscription", mappedBy="id", cascade={"remove", "persist"})
+     */
+    private $lesInscriptions;
+    
+    
+    public function setId($id){
+        $this->id = $id;
+    }
+    
     
     /**
      * Get id
@@ -325,5 +342,29 @@ private $lesIntervenants;
     public function getNbInscrit()
     {
         return $this->nbInscrit;
+    }
+
+    /**
+     * Add lesInscriptions
+     *
+     * @param Lam\MdlBundle\Entity\Inscription $lesInscriptions
+     */
+    public function addInscription(\Lam\MdlBundle\Entity\Inscription $lesInscriptions)
+    {
+        $this->lesInscriptions[] = $lesInscriptions;
+    }
+
+    /**
+     * Get lesInscriptions
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getLesInscriptions()
+    {
+        return $this->lesInscriptions;
+    }
+    
+    public function __toString() {
+        return "Inscription";
     }
 }

@@ -1,9 +1,0 @@
-{% extends 'LamMdlBundle::layout.html.twig' %}
-
-{% block body %}
-<form action="{{path('LamMdlBundle_inscription') }}"  method='POST' {{form_enctype(form)}}>
-    {{form_widget(form)}}
-        {{idStage}}
-        <p> <button type="submit">Ajout</button></p>
-</form>
-{% endblock %}
