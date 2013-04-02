@@ -45,6 +45,7 @@ class DefaultController extends Controller
 	
 	 public function addAction($idFormation, $nbPlacesRestantes){ 
          
+         $message = '';
          $em = $this->getDoctrine()->getEntityManager();
          $formation = $em->getRepository('LamMdlBundle:formation')->find($idFormation);
          
